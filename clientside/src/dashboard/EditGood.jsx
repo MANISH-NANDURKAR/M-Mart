@@ -1,53 +1,51 @@
-import React, { useState } from 'react'
-import { json, useLoaderData, useParams } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useLoaderData, useParams } from 'react-router-dom';
 import { Button, Label, TextInput } from "flowbite-react";
 import { Textarea } from "flowbite-react";
 
 const EditGood = () => {
-
-  const {id} = useParams();
-
-  const{name,price, category,ImgURL} = useLoaderData();
+  const { id } = useParams();
+  const { name, price, category, ImgURL, description } = useLoaderData();
   const goodCategories = ["grocery", "clothes", "shoes"];
-  const [selectedCategory, setSelectedCategory] = useState(goodCategories[0]);
+  const [selectedCategory, setSelectedCategory] = useState(category || goodCategories[0]);
+  const [productDescription, setProductDescription] = useState(description || '');
 
   const handleChangeSelectedValue = (e) => {
     setSelectedCategory(e.target.value);
   };
-  //handle submission
+
+  const handleDescriptionChange = (e) => {
+    setProductDescription(e.target.value);
+  };
 
   const handleSubmission = (e) => {
     e.preventDefault();
-    const form = e.target;
-
+    const form = e.target;    
     const name = form.ProductName.value;
-    const ProductDescription = form.ProductDescription.value;
     const category = selectedCategory; 
 
-    const UpdateproductObj = {
+    const updateProductObj = {
       name,
-      ProductDescription,
+      description: productDescription,
       category,
     };
-    
-  //  update good
 
-    fetch(`http://localhost:5000/good/${id}`,{
-      method:"PATCH",
-      headers:{
-        "content-Type":"application/json"
+    fetch(`http://localhost:5000/good/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
       },
-      body:JSON.stringify(UpdateproductObj)
-    }).then((res) => res.json())
+      body: JSON.stringify(updateProductObj)
+    })
+    .then((res) => res.json())
     .then((data) => {
-      alert("good Updated successfully");
+      alert("Good updated successfully");
     });
   };
 
   return (
-    <div className="px-4 my-12 ">
+    <div className="px-4 my-12">
       <h2 className="mb-8 text-3xl font-bold">Update A good data</h2>
-
       <form
         onSubmit={handleSubmission}
         className="flex lg:w-[1180px] flex-col flex-wrap gap-4"
@@ -74,7 +72,6 @@ const EditGood = () => {
               className="w-full rounded"
               value={selectedCategory}
               onChange={handleChangeSelectedValue}
-              defaultValue={category}
             >
               {goodCategories.map((option) => (
                 <option key={option} value={option}>
@@ -84,18 +81,18 @@ const EditGood = () => {
             </select>
           </div>
         </div>
-        {/* Product description */}
 
-        <div className=" mb-2 block">
+        {/* Product description */}
+        <div className="mb-2 block">
           <Label htmlFor="ProductDescription" value="Product Description" />
           <Textarea
             id="ProductDescription"
-            type="text"
             placeholder="Write product description..."
             required
             rows={5}
             className="w-full"
-            defaultValue={ProductDescription}
+            value={productDescription}
+            onChange={handleDescriptionChange}
           />
         </div>
         <Button
@@ -107,6 +104,6 @@ const EditGood = () => {
       </form>
     </div>
   );
-}
+};
 
-export default EditGood
+export default EditGood;

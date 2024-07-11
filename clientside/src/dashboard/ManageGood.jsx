@@ -60,7 +60,7 @@ const ManageGood = () => {
             </Table.Cell>
             <Table.Cell  className="text-center whitespace-nowrap font-medium text-gray-900 dark:text-white">{good.name}</Table.Cell>
             <Table.Cell  className="text-center whitespace-nowrap font-medium text-gray-900 dark:text-white">{good.category}</Table.Cell>
-            <Table.Cell  className="text-center whitespace-nowrap font-medium text-gray-900 dark:text-white">{good.price}</Table.Cell>
+            <Table.Cell  className="text-center whitespace-nowrap font-medium text-gray-900 dark:text-white">{good.selling_price}</Table.Cell>
             <Table.Cell>
   <Link
     className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 "

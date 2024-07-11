@@ -58,7 +58,7 @@ const Goodscard = ({ headline, good }) => {
                 
               </div>
               <div>
-              <p>{good.price}</p>
+              <p>{good.selling_price}</p>
               </div>
             </Link>
           </SwiperSlide>)

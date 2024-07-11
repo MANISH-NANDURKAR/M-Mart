@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { Sidebar } from "flowbite-react";
 import { HiArrowSmRight, HiChartPie, HiHome, HiInbox, HiOutlineCloudUpload, HiShoppingBag, HiSupport, HiTable, HiUser, HiViewBoards } from "react-icons/hi";
-
+import { BiSolidPurchaseTagAlt } from "react-icons/bi";
+import { FaShoppingBag } from "react-icons/fa";
 import userImg from "../assets/pics/profile.jpeg";
 import { Authcontext } from "../contects/AuthProvider";
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -41,13 +42,18 @@ const SideBar = () => {
           <Sidebar.Item href="/admin/dashboard/manage" icon={HiInbox}>
             <p>Manage Goods</p>
           </Sidebar.Item>
+          <Sidebar.Item href="/admin/dashboard/purchase" icon={FaShoppingBag}>
+            <p>Purchase Memo</p>
+          </Sidebar.Item>
+          <Sidebar.Item href="/admin/dashboard/sell" icon={BiSolidPurchaseTagAlt}>
+            <p>Sell Memo</p>
+          </Sidebar.Item>
           <Sidebar.Item href="#" icon={HiUser}>
             <p>User</p>
           </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiShoppingBag}>
-            <p>Products</p>
-          </Sidebar.Item>
+          
         </Sidebar.ItemGroup>
+
         <Sidebar.ItemGroup>
           <Sidebar.Item href="/login" icon={HiArrowSmRight}>
             <p>Log In</p>
